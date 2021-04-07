@@ -11,7 +11,7 @@ from aws_cdk import(
     aws_codebuild as cb
 )
 
-class PipelineEc2DemoStack(cdk.Stack):
+class PipelineEc2Stack(cdk.Stack):
 
     def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
@@ -24,7 +24,7 @@ class PipelineEc2DemoStack(cdk.Stack):
             output = source_artifact,
             oauth_token= core.SecretValue.secrets_manager('github_token'),
             owner = 'sanya-katiyar',
-            repo = 'pipeline-ec2-demo',
+            repo = 'pipeline-ec2',
             trigger = cpactions.GitHubTrigger.WEBHOOK
         )
 
