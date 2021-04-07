@@ -52,7 +52,7 @@ class PipelineEc2Stack(cdk.Stack):
                                     },
                                     environment=dict(buildImage=cb.LinuxBuildImage.STANDARD_2_0))
                             ),    
-                            project_name = "ec2-deploy-cdk"
+                            project_name = "ec2-deploy-cdk-2"
 
         )
 
