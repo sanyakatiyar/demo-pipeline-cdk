@@ -9,26 +9,19 @@ from aws_cdk import core as cdk
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 from aws_cdk import core
 
-from pipeline_ec2.pipeline_ec2_stack import PipelineEc2Stack
+from pipeline_ec2.pipeline_ec2_stack import PipelineEc2DemoStack
+from pipeline_ec2.ec2_instance_stack import EC2InstanceStack
 
 
 app = core.App()
-PipelineEc2Stack(app, "PipelineEc2Stack",
-    # If you don't specify 'env', this stack will be environment-agnostic.
-    # Account/Region-dependent features and context lookups will not work,
-    # but a single synthesized template can be deployed anywhere.
+EC2InstanceStack(app, "ec2Instance", env={
+    'account' : '189186734332',
+    'region' : 'ap-south-1'
+})
 
-    # Uncomment the next line to specialize this stack for the AWS Account
-    # and Region that are implied by the current CLI configuration.
-
-    #env=core.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION')),
-
-    # Uncomment the next line if you know exactly what Account and Region you
-    # want to deploy the stack to. */
-
-    #env=core.Environment(account='123456789012', region='us-east-1'),
-
-    # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
-    )
+PipelineEc2DemoStack(app, "PipelineEc2DemoStack", env={
+    'account' : '189186734332',
+    'region' : 'ap-south-1'
+})
 
 app.synth()
