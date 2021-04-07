@@ -14,12 +14,12 @@ from pipeline_ec2.ec2_instance_stack import EC2InstanceStack
 
 
 app = core.App()
-EC2InstanceStack(app, "ec2Instance", env={
+EC2InstanceStack(app, "ec2Instance2", env={
     'account' : '189186734332',
     'region' : 'ap-south-1'
 })
 
-PipelineEc2DemoStack(app, "PipelineEc2DemoStack", env={
+PipelineEc2DemoStack(app, "PipelineEc2DemoStack2", env={
     'account' : '189186734332',
     'region' : 'ap-south-1'
 })
