@@ -61,14 +61,14 @@ class EC2InstanceStack(core.Stack):
             role = role
             )
 
-        f = open("C:\\Users\\sk27784\\Documents\\pipeline-ec2-demo\\pipeline_ec2_demo\\config.sh")
-        instance.add_user_data(f.read())
+        # f = open("C:\\Users\\sk27784\\Documents\\pipeline-ec2-demo\\pipeline_ec2_demo\\config.sh")
+        # instance.add_user_data(f.read())
         # instance.user_data.add_execute_file_command(file_path = "/ec2_demo/ec2_demo/config.sh")
         # userData = instance.user_data.add_commands('sudo yum install python35-pip', 'sudo yum install python35')
         # userData.addCommands('sudo yum install python35-pip')
         # userData.addCommands('sudo yum install python35')
  
-        # instance.add_user_data('sudo yum install python35', 'sudo yum install python35-pip')
+        instance.add_user_data('sudo yum install python35', 'sudo yum install python35-pip')
         # instance.add_user_data('sudo yum install python35-pip')
 
 

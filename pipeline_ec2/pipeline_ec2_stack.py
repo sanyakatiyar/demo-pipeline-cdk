@@ -64,7 +64,7 @@ class PipelineEc2Stack(cdk.Stack):
         pipeline = cp.Pipeline(
             self,
             id = "demo-pipeline-2",
-            pipeline_name="pipelineec2-2",
+            pipeline_name="pipelineec2_2",
             stages=[
                 cp.StageProps(stage_name="source_stage", actions=[source_action]),
                 cp.StageProps(stage_name="build_stage", actions=[build_action])
