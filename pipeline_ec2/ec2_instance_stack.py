@@ -25,7 +25,13 @@ class EC2InstanceStack(core.Stack):
                 ec2.SubnetConfiguration(name="public",subnet_type=ec2.SubnetType.PUBLIC)
                 ]
             )
+        sg = ec2.SecurityGroup(self, id="sg", vpc=vpc)
 
+        sg.add_ingress_rule(peer=ec2.Peer.any_ipv4(),
+                            connection=ec2.Port.tcp(80))
+
+        sg.add_ingress_rule(peer=ec2.Peer.any_ipv4(),
+                            connection=ec2.Port.tcp(22))
         # vpc = ec2.Vpc(self, "VPC", cidr="172.32.0.0/16",max_azs=3,enable_dns_hostnames=True, enable_dns_support=True,
         #                 subnet_configuration=[
         #                     ec2.SubnetConfiguration(name="Public",subnet_type=ec2.SubnetType.PUBLIC,cidr_mask=24),
@@ -34,11 +40,11 @@ class EC2InstanceStack(core.Stack):
         # )
  
         ##AMI 
-        amzn_linux = ec2.MachineImage.latest_amazon_linux(
-            generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
-            edition=ec2.AmazonLinuxEdition.STANDARD,
-            virtualization=ec2.AmazonLinuxVirt.HVM,
-            storage=ec2.AmazonLinuxStorage.GENERAL_PURPOSE
+        amzn_linux =ec2.MachineImage.latest_amazon_linux(
+                    generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
+                    edition=ec2.AmazonLinuxEdition.STANDARD,
+                    virtualization=ec2.AmazonLinuxVirt.HVM,
+                    storage=ec2.AmazonLinuxStorage.GENERAL_PURPOSE
             )
  
         # Instance Role and SSM Managed Policy

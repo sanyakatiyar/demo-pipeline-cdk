@@ -28,7 +28,7 @@ class PipelineEc2Stack(cdk.Stack):
             trigger = cpactions.GitHubTrigger.WEBHOOK
         )
 
-        build_project = cb.PipelineProject(self, "code_build",
+        build_project = cb.PipelineProject(self, "code_build_2",
                             build_spec=cb.BuildSpec.from_object(
                                 dict(
                                     version="0.2",
@@ -39,25 +39,23 @@ class PipelineEc2Stack(cdk.Stack):
                                                 "npm update",
                                                 "pip install -r requirements.txt"
                                             ]),
-                                        build=dict(
-                                            commands=[
-                                                "npx cdk --version",
-                                                "npx cdk synth",
-                                                "npx cdk deploy EC2InstanceStack -y"
-                                            ])
+                                        build=dict(commands=[
+                                            "npx cdk --version",
+                                            "npx cdk synth",
+                                            "npx cdk deploy EC2InstanceStack -y --require-approval=never"
+                                        ])
                                     ),
                                     artifacts={
                                         "files": ["**/*"],
-                                        "enable-symlinks" : "yes"
+                                        "enable-symlinks": "yes"
                                     },
                                     environment=dict(buildImage=cb.LinuxBuildImage.STANDARD_2_0))
-                            ),    
-                            project_name = "ec2-deploy-cdk-2"
-
+                            ),
+                            project_name= 'ec2-deploy-cdk-2'
         )
 
         build_action = cpactions.CodeBuildAction(
-                            action_name="deploy_ec2",
+                            action_name="deploy_ec2_2",
                             project=build_project,
                             input=source_artifact,
                             outputs=[build_artifact]
@@ -65,8 +63,8 @@ class PipelineEc2Stack(cdk.Stack):
 
         pipeline = cp.Pipeline(
             self,
-            id = "demo-pipeline",
-            pipeline_name="pipelineec2",
+            id = "demo-pipeline-2",
+            pipeline_name="pipelineec2-2",
             stages=[
                 cp.StageProps(stage_name="source_stage", actions=[source_action]),
                 cp.StageProps(stage_name="build_stage", actions=[build_action])
