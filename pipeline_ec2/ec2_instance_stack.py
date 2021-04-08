@@ -58,7 +58,8 @@ class EC2InstanceStack(core.Stack):
             instance_type=ec2.InstanceType("t2.micro"),
             machine_image=amzn_linux,
             vpc = vpc,
-            role = role
+            role = role, 
+            security_group=sg
             )
 
         # f = open("C:\\Users\\sk27784\\Documents\\pipeline-ec2-demo\\pipeline_ec2_demo\\config.sh")

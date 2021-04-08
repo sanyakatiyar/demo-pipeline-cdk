@@ -5,12 +5,10 @@ from aws_cdk import core as cdk
 # with examples from the CDK Developer's Guide, which are in the process of
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 from aws_cdk import core
-from aws_cdk import(
-    # aws_codepipeline as cp,
-    aws_codepipeline_actions as cpactions,
-    aws_codebuild as cb
-)
+
+import aws_cdk.aws_codepipeline_actions as cpactions
 import aws_cdk.aws_codepipeline as cp
+import aws_cdk.aws_codebuild as cb
 class PipelineEc2Stack(cdk.Stack):
 
     def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
