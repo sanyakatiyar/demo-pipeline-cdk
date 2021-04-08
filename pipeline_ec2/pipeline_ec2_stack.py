@@ -6,11 +6,11 @@ from aws_cdk import core as cdk
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 from aws_cdk import core
 from aws_cdk import(
-    aws_codepipeline as cp,
+    # aws_codepipeline as cp,
     aws_codepipeline_actions as cpactions,
     aws_codebuild as cb
 )
-
+import aws_cdk.aws_codepipeline as cp
 class PipelineEc2Stack(cdk.Stack):
 
     def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
@@ -41,7 +41,6 @@ class PipelineEc2Stack(cdk.Stack):
                                             ]),
                                         build=dict(commands=[
                                             "npx cdk --version",
-                                            "npx cdk synth",
                                             "npx cdk deploy EC2InstanceStack -y --require-approval=never"
                                         ])
                                     ),
