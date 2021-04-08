@@ -40,7 +40,6 @@ class PipelineEc2Stack(cdk.Stack):
                                                 "pip install -r requirements.txt"
                                             ]),
                                         build=dict(commands=[
-                                            "npx cdk --version",
                                             "npx cdk deploy EC2InstanceStack -y --require-approval=never"
                                         ])
                                     ),
