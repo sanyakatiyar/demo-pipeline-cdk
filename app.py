@@ -14,8 +14,8 @@ from pipeline_ec2.ec2_instance_stack import EC2InstanceStack
 
 
 app = core.App()
-EC2InstanceStack(app, "ec2Instance2", env=core.Environment(account = 189186734332, region = ap-south-1))
+EC2InstanceStack(app, "ec2Instance2", env=core.Environment(account = '189186734332', region = 'ap-south-1'))
 
-PipelineEc2Stack(app, "PipelineEc2Stack", env=core.Environment(account=189186734332, region=ap-south-1))
+PipelineEc2Stack(app, "PipelineEc2Stack", env=core.Environment(account = '189186734332', region = 'ap-south-1'))
 
 app.synth()
