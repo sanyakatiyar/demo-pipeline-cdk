@@ -16,7 +16,7 @@ from aws_cdk.core import Tags
  
 class EC2InstanceStack(core.Stack):
  
-    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
+    def __init__(self, scope: core.Construct, id: str, ec2_role : iam.Role, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
  
         ## VPC of the instance
@@ -60,7 +60,7 @@ class EC2InstanceStack(core.Stack):
             instance_type=ec2.InstanceType("t2.micro"),
             machine_image=amzn_linux,
             vpc = vpc,
-            # role = role, 
+            role = ec2_role, 
             security_group=sg
             )
 
