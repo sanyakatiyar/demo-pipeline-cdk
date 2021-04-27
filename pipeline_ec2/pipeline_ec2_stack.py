@@ -9,6 +9,8 @@ from aws_cdk import core
 import aws_cdk.aws_codepipeline_actions as cpactions
 import aws_cdk.aws_codepipeline as cp
 import aws_cdk.aws_codebuild as cb
+
+import aws_cdk.aws_iam as iam
 class PipelineEc2Stack(cdk.Stack):
 
     def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
@@ -38,7 +40,11 @@ class PipelineEc2Stack(cdk.Stack):
                                                 "pip install -r requirements.txt"
                                             ]),
                                         build=dict(commands=[
-                                            "npx cdk deploy EC2InstanceStack"
+                                            "npx cdk --version",
+                                            "npx cdk synth",
+                                            "npx cdk deploy EC2InstanceStack",
+                                            # "npx cdk deploy EC2Stack -y --require-approval=never",
+                                            # "pytest test/ec2_test.py"
                                         ])
                                     ),
                                     artifacts={
@@ -49,6 +55,15 @@ class PipelineEc2Stack(cdk.Stack):
                             ),
                             project_name= 'ec2-deploy-cdk-2'
         )
+        
+        cb_ec2_policy_statement = iam.PolicyStatement( actions=["ec2:*","cloudformation:*","ssm:*","iam:*"],
+                            resources=["*"]
+                            )
+
+        build_project.add_to_role_policy(
+            statement=cb_ec2_policy_statement
+        )
+
 
         build_action = cpactions.CodeBuildAction(
                             action_name="deploy_ec2_2",

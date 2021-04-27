@@ -7,10 +7,12 @@ from aws_cdk import (
     aws_iam as iam,
     core    
 )
+
+from aws_cdk.core import Tags
  
 # __filepath__ = '/Documents/escoe/ccf-infra/configuration.sh'
-__filepath__ = '/Users/sk27784/ec2_demo/ec2_demo/config.sh'
-dirname = os.path.dirname(__filepath__)
+# __filepath__ = '/Users/sk27784/ec2_demo/ec2_demo/config.sh'
+# dirname = os.path.dirname(__filepath__)
  
 class EC2InstanceStack(core.Stack):
  
@@ -40,7 +42,7 @@ class EC2InstanceStack(core.Stack):
         # )
  
         ##AMI 
-        amzn_linux =ec2.MachineImage.latest_amazon_linux(
+        amzn_linux = ec2.MachineImage.latest_amazon_linux(
                     generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
                     edition=ec2.AmazonLinuxEdition.STANDARD,
                     virtualization=ec2.AmazonLinuxVirt.HVM,
@@ -48,9 +50,9 @@ class EC2InstanceStack(core.Stack):
             )
  
         # Instance Role and SSM Managed Policy
-        role = iam.Role(self, "InstanceSSM", assumed_by=iam.ServicePrincipal("ec2.amazonaws.com"))
+        # role = iam.Role(self, "InstanceSSM", assumed_by=iam.ServicePrincipal("ec2.amazonaws.com"))
  
-        role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AmazonEC2RoleforSSM"))
+        # role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AmazonEC2RoleforSSM"))
  
         # Instance
         
@@ -58,7 +60,7 @@ class EC2InstanceStack(core.Stack):
             instance_type=ec2.InstanceType("t2.micro"),
             machine_image=amzn_linux,
             vpc = vpc,
-            role = role, 
+            # role = role, 
             security_group=sg
             )
 
@@ -69,10 +71,15 @@ class EC2InstanceStack(core.Stack):
         # userData.addCommands('sudo yum install python35-pip')
         # userData.addCommands('sudo yum install python35')
  
-        instance.add_user_data('sudo yum install python35', 'sudo yum install python35-pip')
+        # instance.add_user_data('sudo yum install python35', 'sudo yum install python35-pip')
         # instance.add_user_data('sudo yum install python35-pip')
 
+        instance.add_user_data("sudo yum install httpd -y")
+        instance.add_user_data("sudo systemctl start httpd")
+        instance.add_user_data("sudo systemctl enable httpd")
+        instance.add_user_data("sudo echo '<h1> this is cdk instance!</h1>' >> /var/www/html/index.html")
 
+        Tags.of(instance).add("Owner", "sanya")
 
  
 # app = core.App()
