@@ -42,7 +42,7 @@ class PipelineEc2Stack(cdk.Stack):
                                         build=dict(commands=[
                                             "npx cdk --version",
                                             "npx cdk synth",
-                                            "npx cdk deploy EC2InstanceStack -y --require-approval=never"
+                                            "npx cdk deploy ec2Instance2 -y --require-approval=never"
                                             # "npx cdk deploy EC2Stack -y --require-approval=never",
                                             # "pytest test/ec2_test.py"
                                         ])
