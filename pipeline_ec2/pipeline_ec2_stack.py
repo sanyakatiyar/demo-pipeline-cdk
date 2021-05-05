@@ -45,7 +45,7 @@ class PipelineEc2Stack(cdk.Stack):
                                             "npx cdk --version",
                                             "npx cdk synth",
                                             "npx cdk deploy ec2Instance2 -y --require-approval=never"
-                                            "cfn_nag --input-json-path c2Instance2.template.json"
+                                            "cfn_nag --input-json-path ec2Instance2.template.json"
                                             # "npx cdk deploy EC2Stack -y --require-approval=never",
                                             # "pytest test/ec2_test.py"
                                         ])
