@@ -25,7 +25,7 @@ class PipelineEc2Stack(cdk.Stack):
             oauth_token= core.SecretValue.secrets_manager('github_token'),
             owner = 'sanya-katiyar',
             repo = 'pipeline-ec2',
-            trigger = cpactions.GitHubTrigger.POLL
+            trigger = cpactions.GitHubTrigger.WEBHOOK
         )
 
         build_project = cb.PipelineProject(self, "code_build_2",
@@ -44,7 +44,7 @@ class PipelineEc2Stack(cdk.Stack):
                                         build=dict(commands=[
                                             "npx cdk --version",
                                             "npx cdk synth",
-                                            "npx cdk deploy ec2Instance2 -y --require-approval=never"
+                                            "npx cdk deploy ec2Instance2 -y --require-approval=never",
                                             "cfn_nag --input-json-path ec2Instance2.template.json"
                                             # "npx cdk deploy EC2Stack -y --require-approval=never",
                                             # "pytest test/ec2_test.py"
