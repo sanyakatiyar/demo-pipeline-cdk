@@ -25,7 +25,7 @@ class PipelineEc2Stack(cdk.Stack):
             oauth_token= core.SecretValue.secrets_manager('github_token'),
             owner = 'sanya-katiyar',
             repo = 'pipeline-ec2',
-            trigger = cpactions.GitHubTrigger.WEBHOOK
+            trigger = cpactions.GitHubTrigger.POLL
         )
 
         build_project = cb.PipelineProject(self, "code_build_2",
