@@ -77,7 +77,7 @@ class EC2InstanceStack(core.Stack):
         instance.add_user_data("sudo yum install httpd -y")
         instance.add_user_data("sudo systemctl start httpd")
         instance.add_user_data("sudo systemctl enable httpd")
-        instance.add_user_data("sudo echo '<h1> this is cdk instance!</h1>' >> /var/www/html/index.html")
+        instance.add_user_data("sudo echo '<h1> this is cdk instance! hello hi</h1>' >> /var/www/html/index.html")
 
         Tags.of(instance).add("Owner", "sanya")
 
