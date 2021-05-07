@@ -17,7 +17,7 @@ from pipeline_ec2.iam_stack import IAMStack
 app = core.App()
 roles = IAMStack(app, "IAMroleEC2", env={'account' : '189186734332','region' : 'ap-south-1'})
 EC2InstanceStack(app, "ec2Instance2", env={'account' : '189186734332','region' : 'ap-south-1'}, ec2_role = roles.role_ec2)
-PipelineEc2Stack(app, "PipelineEc2Stack", env={'account' : '189186734332','region' : 'ap-south-1'})
-# PipelineEc2Stack(app, "PipelineEc2StackNew", env={'account' : '189186734332','region' : 'ap-south-1'})
+# PipelineEc2Stack(app, "PipelineEc2Stack", env={'account' : '189186734332','region' : 'ap-south-1'})
+PipelineEc2Stack(app, "PipelineEc2StackNew", env={'account' : '189186734332','region' : 'ap-south-1'})
 app.synth()
 
