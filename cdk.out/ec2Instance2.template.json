@@ -358,7 +358,7 @@
           }
         ],
         "UserData": {
-          "Fn::Base64": "#!/bin/bash\nsudo yum install httpd -y\nsudo systemctl start httpd\nsudo systemctl enable httpd\nsudo echo '<h1> this is cdk instance! hello </h1>' >> /var/www/html/index.html"
+          "Fn::Base64": "#!/bin/bash\nsudo yum install httpd -y\nsudo systemctl start httpd\nsudo systemctl enable httpd\nsudo echo '<h1> this is cdk instance! hello hi</h1>' >> /var/www/html/index.html"
         }
       },
       "Metadata": {

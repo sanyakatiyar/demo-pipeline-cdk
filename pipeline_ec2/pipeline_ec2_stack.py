@@ -46,10 +46,14 @@ class PipelineEc2Stack(cdk.Stack):
                                             "npx cdk synth",
                                             "cfn_nag_scan --input-path ec2Instance2.json",
                                             "cfn_nag_rules",
-                                            "cfn_nag_scan --input-path cdk.out/ec2Instance2.template.json"
+                                            "npx cdk synth Ec2instance2 -j -e > stack_template/stack-test-template.json",
+                                            "cfn_nag_scan --input-path stack_template/stack-test-template.json"
                                            
-                                            # "npx cdk deploy ec2Instance2 -y --require-approval=never",
                                             # "npx cdk deploy EC2Stack -y --require-approval=never",
+                                            # "cfn_nag_scan --input-path ec2Instance2.json",
+                                            # "cfn_nag_scan --input-path cdk.out/ec2Instance2.template.json"
+                                            # "npx cdk deploy ec2Instance2 -y --require-approval=never",
+                                            
                                             # "pytest test/ec2_test.py"
                                             # cfn_nag_scan --fail-on-warnings –profile-path .cfn_nag.profile  --input-path  ${Template} -o json 
                                         ])
